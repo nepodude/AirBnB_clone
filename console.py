@@ -175,6 +175,22 @@ class HBNBCommand(cmd.Cmd):
                 str(obj) for key, obj in objects.items() if key.startswith(f"{class_name}.")
             ]
             print(result)
+        elif command == "count":
+            # Count all instances of the specified class
+            objects = storage.all()
+            count = sum(1 for key in objects if key.startswith(f"{class_name}."))
+            print(count)
+        elif command == "show":
+            # Retrieve an instance of the specified class by ID
+            if not args:
+                print("** instance id missing **")
+                return
+            key = f"{class_name}.{args}"
+            instance = storage.all().get(key)
+            if not instance:
+                print("** no instance found **")
+                return
+            print(instance)
         else:
             print("*** Unknown syntax:", line)
 
