@@ -1,0 +1,1 @@
+models/engine directory will contain all storage classes (using the same prototype). For the moment you will have only one: file_storage.py.
