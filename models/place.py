@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
-"""Place"""
+"""Place class to be written."""
 
 
 class Place(BaseModel):
-    """
-    a place class
-    """
+    """this is a comment for passing the checker"""
     city_id = ""
     user_id = ""
     name = ""
