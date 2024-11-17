@@ -147,6 +147,36 @@ class HBNBCommand(cmd.Cmd):
                 pass
             setattr(instance, attr_name, attr_value)
             instance.save()
+    def default(self, line):
+        """
+        Handle commands in the format <class name>.all().
+        """
+        if '.' not in line:
+            print("*** Unknown syntax:", line)
+            return
+        
+        # Split the input into class name and command
+        try:
+            class_name, command = line.split('.')
+            command, _ = command.split('(', 1)  # Get the command part (e.g., "all")
+        except ValueError:
+            print("*** Unknown syntax:", line)
+            return
+
+        # Check if the class exists
+        if class_name not in classes:
+            print("** class doesn't exist **")
+            return
+
+        if command == "all":
+            # Retrieve all instances of the specified class
+            objects = storage.all()
+            result = [
+                str(obj) for key, obj in objects.items() if key.startswith(f"{class_name}.")
+            ]
+            print(result)
+        else:
+            print("*** Unknown syntax:", line)
 
 
 if __name__ == '__main__':
