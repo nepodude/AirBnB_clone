@@ -1,10 +1,17 @@
 #!/usr/bin/python3
-"""City module - contains the City class that inherits from BaseModel"""
+"""
+Unit tests for the City class.
+"""
+import unittest
+from models.city import City
 
-from models.base_model import BaseModel
+
+class TestCity(unittest.TestCase):
+    def test_attributes(self):
+        city = City()
+        self.assertEqual(city.state_id, "")
+        self.assertEqual(city.name, "")
 
 
-class City(BaseModel):
-    """City class representing a city"""
-    state_id = ""  # State.id
-    name = ""
+if __name__ == "__main__":
+    unittest.main()

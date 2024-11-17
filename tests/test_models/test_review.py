@@ -1,11 +1,18 @@
 #!/usr/bin/python3
-"""Review module - contains the Review class that inherits from BaseModel"""
+"""
+Unit tests for the Review class.
+"""
+import unittest
+from models.review import Review
 
-from models.base_model import BaseModel
+
+class TestReview(unittest.TestCase):
+    def test_attributes(self):
+        review = Review()
+        self.assertEqual(review.place_id, "")
+        self.assertEqual(review.user_id, "")
+        self.assertEqual(review.text, "")
 
 
-class Review(BaseModel):
-    """Review class representing a review"""
-    place_id = ""         # Place.id
-    user_id = ""          # User.id
-    text = ""
+if __name__ == "__main__":
+    unittest.main()

@@ -1,19 +1,26 @@
 #!/usr/bin/python3
-"""Place module - contains the Place class that inherits from BaseModel"""
+"""
+Unit tests for the Place class.
+"""
+import unittest
+from models.place import Place
 
-from models.base_model import BaseModel
+
+class TestPlace(unittest.TestCase):
+    def test_attributes(self):
+        place = Place()
+        self.assertEqual(place.city_id, "")
+        self.assertEqual(place.user_id, "")
+        self.assertEqual(place.name, "")
+        self.assertEqual(place.description, "")
+        self.assertEqual(place.number_rooms, 0)
+        self.assertEqual(place.number_bathrooms, 0)
+        self.assertEqual(place.max_guest, 0)
+        self.assertEqual(place.price_by_night, 0)
+        self.assertEqual(place.latitude, 0.0)
+        self.assertEqual(place.longitude, 0.0)
+        self.assertEqual(place.amenity_ids, [])
 
 
-class Place(BaseModel):
-    """Place class representing a place"""
-    city_id = ""          # City.id
-    user_id = ""          # User.id
-    name = ""
-    description = ""
-    number_rooms = 0
-    number_bathrooms = 0
-    max_guest = 0
-    price_by_night = 0
-    latitude = 0.0
-    longitude = 0.0
-    amenity_ids = []      # List of Amenity.id
+if __name__ == "__main__":
+    unittest.main()
