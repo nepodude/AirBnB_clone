@@ -191,59 +191,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
                 return
             print(instance)
-        elif command == "destroy":
-            # Check if an ID was provided
-            if not args:
-                print("** instance id missing **")
-                return
-            key = f"{class_name}.{args}"
-            if key in storage.all():
-                del storage.all()[key]
-                storage.save()
-            else:
-                print("** no instance found **")
-        elif command == "update":
-            args = args.split(", ")
-            if len(args) < 2:
-                print("** instance id missing **")
-                return
-            instance_id = args[0].strip('"')
-            attr_name = args[1].strip('"')
-            if len(args) < 3:
-                print("** value missing **")
-                return
-            attr_value = args[2].strip('"')
-            
-            key = f"{class_name}.{instance_id}"
-            instance = storage.all().get(key)
-            if not instance:
-                print("** no instance found **")
-                return
-            
-            # Update the instance attribute
-            if hasattr(instance, attr_name):
-                attr_value = type(getattr(instance, attr_name))(attr_value)
-            setattr(instance, attr_name, attr_value)
-            instance.save()
-        elif command == "update" and args.      startswith("{"):
-            instance_id, attr_dict = args.split(",", 1)
-            instance_id = instance_id.strip('"')
-            key = f"{class_name}.{instance_id}"
-            instance = storage.all().get(key)
-            if not instance:
-                print("** no instance found **")
-                return
-            
-            # Convert the attribute string to a dictionary
-            attr_dict = eval(attr_dict.strip())
-            if isinstance(attr_dict, dict):
-                for attr_name, attr_value in attr_dict.items():
-                    if hasattr(instance, attr_name):
-                        attr_value = type(getattr(instance, attr_name))(attr_value)
-                    setattr(instance, attr_name, attr_value)
-                instance.save()
-
-
         else:
             print("*** Unknown syntax:", line)
 
