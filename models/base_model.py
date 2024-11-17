@@ -3,7 +3,6 @@
 attributes/methods for other classes:"""
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -16,6 +15,7 @@ class BaseModel:
         Initializes a new instance of BaseModel.
         Assigns a unique ID, and sets creation and update timestamps.
         """
+        from models import storage
         if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -40,6 +40,7 @@ class BaseModel:
         """updates the public instance attribute
         updated_at with the current datetime"""
 
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
 

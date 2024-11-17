@@ -4,6 +4,12 @@ Module for FileStorage class.
 Handles serialization of objects to JSON and deserialization back to objects.
 """
 import json
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
@@ -46,6 +52,9 @@ class FileStorage:
             with open(self.__file_path, 'r') as json_file:
                 obj_dict = json.load(json_file)
                 for key, value in obj_dict.items():
-                    self.__objects[key] = BaseModel(**value)
+                    cls_name = value['__class__']
+                    cls = globals().get(cls_name)
+                    if cls:
+                        self.__objects[key] = cls(**value)
         except FileNotFoundError:
             pass
