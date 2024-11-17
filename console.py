@@ -180,17 +180,6 @@ class HBNBCommand(cmd.Cmd):
             objects = storage.all()
             count = sum(1 for key in objects if key.startswith(f"{class_name}."))
             print(count)
-        elif command == "show":
-            # Retrieve an instance of the specified class by ID
-            if not args:
-                print("** instance id missing **")
-                return
-            key = f"{class_name}.{args}"
-            instance = storage.all().get(key)
-            if not instance:
-                print("** no instance found **")
-                return
-            print(instance)
         else:
             print("*** Unknown syntax:", line)
 
